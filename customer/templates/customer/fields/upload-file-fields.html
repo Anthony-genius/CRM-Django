@@ -1,0 +1,12 @@
+<div class="input-group">
+    <div class="custom-file">
+        <input type="file" class="custom-file-input" id="upload-file" aria-describedby="Upload file" {% if required_fields.upload_fields.upload %}required="required"{% endif %}>
+        <label class="custom-file-label" for="upload-file">Choose file</label>
+    </div>
+    <div class="input-group-append">
+        <input class="form-control" type="text" name="upload-name" placeholder="Enter file name" disabled>
+    </div>
+    <div class="input-group-append">
+        <button class="btn btn-outline-primary" type="button" id="upload-btn" disabled>Upload</button>
+    </div>
+</div>

@@ -1,0 +1,22 @@
+{% if files %}
+<div class="pt-3">
+    <table class="table">
+        <thead>
+            <th>File</th>
+            <th>Uploaded</th>
+        </thead>
+        <tbody>
+            {% for file in files %}
+            <tr>
+                <td>
+                    <a href="{{file.url}}" target="_blank">{{file.file_name}}</a>
+                </td>
+                <td>
+                    {{file.created_date}}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endif %}

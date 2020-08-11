@@ -1,0 +1,230 @@
+<div class="d-none">
+    <input type="number" name="requirement_pk" value="{{ requirement.pk }}">
+</div>
+
+
+<div class="form-row">
+
+    <div class="form-group col-md-4">
+        <label for="kw">KW</label>
+        <input type="text" class="form-control" id="kw" name="kw" value="{{ requirement.kw|default:'' }}"
+               placeholder="Enter KW" {% if required_fields.system_fields.kw %}required="required"{% endif %}>
+    </div>
+
+
+    <div class="form-group col-md-2">
+        <label for="panel">Panel</label>
+        <input type="text" class="form-control" id="panel" name="panel" value="{{ requirement.panel|default:'' }}"
+               placeholder="Enter panel" {% if required_fields.system_fields.panel %}required="required"{% endif %}>
+    </div>
+    <div class="form-group col-md-2">
+        <label for="panel-pcs">pcs</label>
+        <input type="number" class="form-control form-control-sm" id="panel-pcs" name="panel_pcs"
+               value="{{ requirement.panel_pcs }}"
+               placeholder="Enter pcs"
+               {% if required_fields.system_fields.panel_pcs %}required="required"{% endif %}>
+    </div>
+
+    <div class="form-group col-md-2">
+        <label for="inverter">Inverter</label>
+        <input type="text" class="form-control" id="inverter" name="inverter"
+               value="{{ requirement.inverter|default:'' }}" placeholder="Enter inverter"
+               {% if required_fields.system_fields.inverter %}required="required"{% endif %}>
+    </div>
+    <div class="form-group col-md-2">
+        <label for="inverter-pcs">Inverter pcs</label>
+        <input type="number" class="form-control form-control-sm" id="inverter-pcs" name="inverter_pcs"
+               value="{{ requirement.inverter_pcs }}" placeholder="Enter panel pcs"
+               {% if required_fields.system_fields.inverter_pcs %}required="required"{% endif %}>
+    </div>
+</div>
+
+<div class="row">
+
+    <div class="form-group col-md-4">
+        <label for="roof-type">Roof Type</label>
+        <div>
+            <select name="roof_type" id="roof-type" class="form-control"
+                    {% if required_fields.system_fields.roof_type %}required="required"{% endif %}>
+                <option value="">Select...</option>
+                {% for roof_type in roof_types %}
+                    <option value="{{ roof_type.id }}"
+                            {% if roof_type.id == requirement.roof_type_id %}selected="selected"{% endif %}>{{ roof_type.name }}</option>
+                {% endfor %}
+            </select>
+        </div>
+    </div>
+
+    <div class="form-group col-md-4">
+
+        <label for="storey">Storey</label>
+        <div>
+            <select name="storey" id="storey" class="form-control"
+                    {% if required_fields.system_fields.storey %}required="required"{% endif %}>
+                <option value="">Select...</option>
+                {% for storey in storeys %}
+                    <option value="{{ storey.id }}"
+                            {% if storey.id == requirement.storey_id %}selected="selected"{% endif %}>{{ storey.name }}</option>
+                {% endfor %}
+            </select>
+        </div>
+    </div>
+
+    <div class="form-group col-md-4">
+        <label for="electric-power">Electric Power</label>
+        <div>
+            <select name="electric_power" id="electric-power" class="form-control"
+                    {% if required_fields.system_fields.electric_power %}required="required"{% endif %}>
+                <option value="">Select...</option>
+                {% for electric_power in electric_powers %}
+                    <option value="{{ electric_power.id }}"
+                            {% if electric_power.id == requirement.electric_power_id %}selected="selected"{% endif %}>{{ electric_power.name }}</option>
+                {% endfor %}
+            </select>
+        </div>
+    </div>
+</div>
+
+<div class="form-group row">
+    <div class="form-group col-md-12">
+        <label for="installation-notes">Installation Notes</label>
+        <div>
+        <textarea class="form-control" id="installation-notes" name="installation_notes"
+                  placeholder="Enter installation notes" rows="3"
+                  {% if required_fields.system_fields.installation_notes %}required="required"{% endif %}>{{ requirement.installation_notes|default:"" }}</textarea>
+        </div>
+    </div>
+</div>
+
+<div class="form-group row">
+    <div class="form-group ">
+        <label for="extra-amount" class="col-sm-12 col-form-label">Extra amount</label>
+        <div class="col-sm-10">
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text amount-field">$</span>
+                </div>
+                <input type="number" class="form-control" id="extra-amount" name="extra_amount"
+                       value="{% if requirement.extra_amount is not none %}{{ requirement.extra_amount }}{% else %}0{% endif %}" placeholder="0"
+                >
+            </div>
+        </div>
+    </div>
+
+
+    <div class="form-group ">
+        <label for="extra-amount" class="col-sm-12 col-form-label">System Price</label>
+        <div class="col-sm-10">
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text amount-field">$</span>
+                </div>
+                <input type="number" class="form-control" id="system-price" name="system_price"
+                       value="{{ requirement.system_price }}" placeholder="0"
+                >
+            </div>
+        </div>
+    </div>
+
+
+</div>
+
+
+<div class="form-group row">
+
+    <div class="form-group ">
+        <label for="total-amount" class="col-sm-12 col-form-label">Total amount</label>
+        <div class="col-sm-10">
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text amount-field">$</span>
+                </div>
+                <input type="number" class="form-control" id="total-price" name="total_price"
+                       value="{{ requirement.total_price }}" placeholder=0
+                       {% if required_fields.system_fields.total_price %}required="required"
+                       readonly="readonly"{% endif %}>
+            </div>
+        </div>
+    </div>
+    <div class="form-group ">
+        <label for="deposit-amount" class="col-sm-12 col-form-label">Deposit</label>
+        <div class="col-sm-10">
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text amount-field">$</span>
+                </div>
+                <input type="number" class="form-control" id="deposit-amount" name="deposit_amount"
+                       value="{{ requirement.deposit_amount }}" placeholder="0"
+                       {% if required_fields.system_fields.deposit_amount %}required="required"{% endif %}>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group ">
+        <label for="last-amount" class="col-sm-12 col-form-label">Last amount</label>
+        <div class="col-sm-10">
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text amount-field">$</span>
+                </div>
+                <input type="number" class="form-control" id="last-amount" name="last_amount"
+                       value="{{ requirement.last_amount }}" placeholder="0" readonly="readonly"
+                       {% if required_fields.system_fields.last_amount %}required="required"{% endif %}>
+            </div>
+        </div>
+    </div>
+</div>
+{% include 'customer/fields/credit-card-fields.html' %}
+
+{% if power_meter_connection_disable %}
+    <div></div>
+{% else %}
+    <h2 class="py-3">Connection</h2>
+
+    <div class="row">
+        <div class="form-group col-6">
+            <label for="power-connection" class="col-sm-12 col-form-label">Power connection</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="power-connection" name="power_connection"
+                       value="{{ requirement.power_connection|default:'' }}" placeholder="Enter power connection"
+                       {% if required_fields.system_fields.power_connection %}required="required"{% endif %}>
+            </div>
+        </div>
+
+        <div class="form-group col-6">
+            <label for="meter-connection" class="col-sm-12 col-form-label">Meter connection</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="meter-connection" name="meter_connection"
+                       value="{{ requirement.meter_connection|default:'' }}" placeholder="Enter meter connection"
+                       {% if required_fields.system_fields.meter_connection %}required="required"{% endif %}>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="row">
+        <div class="form-group col-6">
+            <label for="power-connection" class="col-sm-12 col-form-label">MNI</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="MNI" name="MNI"
+                       value="{{ requirement.MNI|default:'' }}" placeholder="MNI"
+                       {% if required_fields.system_fields.power_connection %}required="required"{% endif %}>
+            </div>
+        </div>
+
+
+        <div class="form-group col-6">
+            <label for="customer-check" class="col-sm-2 col-form-label">Application</label>
+            <div class="col-sm-10 pl-5">
+                <input class="form-check-input" type="checkbox" id="Application" name="Application"
+                        {% if requirement.application %}
+                       checked {% endif %}>
+            </div>
+        </div>
+
+    </div>
+
+
+
+
+{% endif %}

@@ -1,0 +1,40 @@
+{% extends "customer/navbar.html" %} {% block main %}
+
+<main>
+    <div class="container-fluid">
+        {% if scrap_url_fields %}
+            {% if search_value %}
+                {% include 'customer/fields/scrap_url-fields.html'  with scrap_url=scrap_url additional_context='blah'  %}
+
+            {% else %}
+                {% include 'customer/fields/scrap_url-fields.html' %}
+            {% endif %}
+        {% endif %}
+        <div class="row">
+            <div class="col-md p-3">
+                <h2 class="py-3">New Customer</h2>
+                <form id="customer-form" method="post" action="{% url 'customer-list' %}">
+                    {% csrf_token %} {% include 'customer/fields/customer-fields.html' %}
+                    <button type="submit" class="btn btn-primary my-3" name="btn_create_customer">Create new customer</button>
+                </form>
+            </div>
+            <div class="col-md p-3">
+                <h2 class="py-3">New Service</h2>
+                <form id="service-form" method="post" action="{% url 'customer-list' %}">
+                    {% csrf_token %} {% include 'customer/fields/service-fields.html' %}
+                    <button type="submit" class="btn btn-primary my-3" name="btn_create_service">Create new service</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</main>
+{% endblock main %} {% block extra_js %}
+
+<script>
+    $(document).ready(function() {
+        $('.nav-item').removeClass("active");
+        $('#' + "{{current_tab}}").addClass("active")
+    });
+</script>
+
+{% endblock extra_js %}
